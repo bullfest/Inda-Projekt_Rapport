@@ -103,7 +103,11 @@ Användaren ska kunna navigera huvudmenyn för och ändra spelets inställningar. An
 Användaren ska kunna starta en spelomgång och spela utan att vara förhindrad av okunskap gällande spelets regler och kontroller.
 
 \section{Programdesign}
+Vårat spel kommer ha en huvudklass (\ttt{Pirates}) som skapar alla olika objekt och har en spel-loop. Den kommer antagligen ha lite privata hjälpmetoder och möjligtvis någon metod för att kommunicera med andra klasser.
 
+För att hantera grafik kommer vi skapa en \ttt{Window}-klass. Den kommer att hantera objekt som ärver den abstrakta klassen \ttt{Drawable} och rita dem när \ttt{Pirates} anropar \ttt{Window}s \ttt{draw()}-metod.
+
+Alla ''fysiska'' objekt i spelet (\ttt{Boat}, \ttt{Cannonball} och \ttt{Island}) ärver från den abstrakta klassen \ttt{Entity} som ger \ttt{Pirates} ett gränssnitt för att uppdatera och hantera kollisioner mellan olika fysiska objekt. \ttt{Entity} ärver från \ttt{Drawable}.
 \begin{figure}[h!]
 	\centering
 	\includegraphics[width=0.5\textwidth]{Bilder/Class-diagram}
