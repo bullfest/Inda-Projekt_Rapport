@@ -29,6 +29,8 @@
 
 \newcommand{\ttt}[1]{\texttt{#1}}
 
+\newcommand{\HRule}{\rule{\linewidth}{0.5mm}}
+
 \definecolor{codegreen}{rgb}{0,0.6,0}
 \definecolor{codegray}{rgb}{0.5,0.5,0.5}
 \definecolor{codepurple}{rgb}{0.58,0,0.82}
@@ -58,7 +60,33 @@
 \lstset{style=mystyle}
 
 \begin{document}
-
+\begin{titlepage}
+	\begin{center}
+		
+		~\vspace{1.75cm} ~
+		
+		\textsc{\Large Projektarbete \\ Introduktion till datalogi \\[0.25cm] DD1339, inda14}\\[1.75cm]
+		
+		% Title
+		{ \huge \HRule\\[0.4cm] \bfseries Pirates of Pang Pang\\[0.4cm]}
+		
+		\HRule \\[0.5cm]
+		
+		{\large A game for landlubbers to feel the breeze of seven seas} \\ [1.5cm]
+		
+		\large Alexander Viklund
+		\\[0.1cm] \large August Falk
+		\\[3cm] Description: Pirates is a game where you face your friends in a fierce deathbattle. You control your own pirate ship and use its cannons to shoot down your foes.
+		
+		\vfill
+		
+		
+		% Bottom of the page
+		
+		{\large \today}
+		
+	\end{center}
+\end{titlepage}
 \section{Programbeskrivning}
 Programmet kommer att vara ett enkelt tvåpersonsspel.
 Spelet kommer i grunden att gå ut på att man styr varsitt piratskepp och försöker skjuta ner varandra.
@@ -108,6 +136,9 @@ Vårat spel kommer ha en huvudklass (\ttt{Pirates}) som skapar alla olika objekt 
 För att hantera grafik kommer vi skapa en \ttt{Window}-klass. Den kommer att hantera objekt som ärver den abstrakta klassen \ttt{Drawable} och rita dem när \ttt{Pirates} anropar \ttt{Window}s \ttt{draw()}-metod.
 
 Alla ''fysiska'' objekt i spelet (\ttt{Boat}, \ttt{Cannonball} och \ttt{Island}) ärver från den abstrakta klassen \ttt{Entity} som ger \ttt{Pirates} ett gränssnitt för att uppdatera och hantera kollisioner mellan olika fysiska objekt. \ttt{Entity} ärver från \ttt{Drawable}.
+
+Efter att ha ritat bilderna nedan inser vi att vi antagligen kommer behöva någon form av matris-hjälpklass för att kunna hantera acceleration i specifika riktningar och mer avancerad kollision samt vridning av objekt.
+
 \begin{figure}[h!]
 	\centering
 	\includegraphics[width=0.5\textwidth]{Bilder/Class-diagram}
