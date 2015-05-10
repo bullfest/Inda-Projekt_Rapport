@@ -1,18 +1,23 @@
-import javax.swing.*;
-import java.awt.*;
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 
 /**
  * Created by Alexander on 2015-05-08.
  */
 public abstract class Drawable {
     Point position;
-    ImageIcon icon;
+    double angle = 0;
+    BufferedImage image;
 
-    public Drawable(Point p, ImageIcon i)
-    {
+    public Drawable(Point p, String imagePath) {
         position = p;
-        icon = i;
-
+        try {
+            image = ImageIO.read(new File(imagePath));
+        } catch (IOException e) {
+            System.err.println("Error when reading file: " + imagePath);
+        }
     }
 
     public Point getPos() {
@@ -23,11 +28,19 @@ public abstract class Drawable {
         position = p;
     }
 
-    public ImageIcon getIcon() {
-        return icon;
+    public BufferedImage getImage() {
+        return image;
     }
 
-    public void setIcon(ImageIcon i) {
-        this.icon = i;
+    /**
+     * Set the angle of the rotation of the sprite relative to the positive x-axis counter-clockwise
+     * @param angle The rotation of the sprite in degrees.
+     */
+    public void setAngle(double angle) {
+        this.angle = angle;
+    }
+
+    public double getAngle() {
+        return angle;
     }
 }
