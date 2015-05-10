@@ -97,4 +97,22 @@ public class Matrix {
         }
         return res;
     }
+
+    protected double[][] getData() {
+        return data;
+    }
+
+    protected void setData(double[][] data) {
+        this.data = data;
+    }
+
+    public Matrix transpose() {
+        Matrix res = new Matrix(getCols(),getRows());
+        for (int i = 0; i < getRows(); i++) {
+            for (int j = 0; j < getCols(); j++) {
+                res.setElem(j,i,getElem(i,j));
+            }
+        }
+        return res;
+    }
 }
