@@ -32,13 +32,13 @@ public class Matrix {
     }
 
     public void setElem(int m, int n, double value) {
-        if (m <=0 || n<=0 || m > getRows()-1 || n>getCols()-1)
+        if (m <0 || n<0 || m > getRows()-1 || n>getCols()-1)
             throw new IllegalArgumentException("m and n has to be within the matrix.");
         data[m][n] = value;
     }
 
     public double getElem(int m, int n) {
-        if (m <=0 || n<=0 || m > getRows()-1 || n>getCols()-1)
+        if (m <0 || n<0 || m > getRows()-1 || n>getCols()-1)
             throw new IllegalArgumentException("m and n has to be within the matrix.");
         return data[m][n];
     }
