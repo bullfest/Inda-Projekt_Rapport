@@ -15,17 +15,18 @@ public class Point extends Vector{
     }
 
     public void add(Point p) {
-        setData(add(p,1).getData());
+        setData(add(p, 1).getData());
     }
 
     /**
-     * Rotates the vector a specified number of radians counter-clockwise.
-     * @param radians
+     * Rotates the vector counter-clockwise.
+     * @param angle The angle for the vector to be rotated in degrees.
      */
-    public void rotate(double radians) {
+    public void rotate(double angle) {
+        angle = Math.toRadians(angle);
         Matrix rotate = new Matrix(new double[][] {
-                {Math.cos(radians),-Math.sin(radians)},
-                {Math.sin(radians),Math.cos(radians)}
+                {Math.cos(angle),-Math.sin(angle)},
+                {Math.sin(angle),Math.cos(angle)}
         });
         setData(rotate.multiply(this).getData());
     }
