@@ -88,20 +88,39 @@
 	\end{center}
 \end{titlepage}
 \section{Programbeskrivning}
+\subsection{A}
 Programmet kommer att vara ett enkelt tvåpersonsspel.
 Spelet kommer i grunden att gå ut på att man styr varsitt piratskepp och försöker skjuta ner varandra.
 
-\subsection{Syfte}
+\subsubsection{Syfte}
 Spelets syfte är att vara ett kul socialt tidsfördriv.
 
 Vi har valt att göra detta spel, då vi minns från vår ungdoms dagar hur roligt det var att spela flashspelet ''achtung die kurve'' och vill återskapa glädjen av att sitta ett gäng kompisar runt en dator och skrika på varandra.
 
+\subsection{B}
+Programmet är ett tvåpersonsspel där man styr varsitt piratskepp och försöker skjuta på varandra. När en spelare har fått slut på liv så vinner den andra spelaren och en ny omgång kan påbörjas.
+
+\subsection{C}
+Programbeskrivningen var kanske inte så ingående men vårt slutresultat passar väl in på den ursprungliga programbeskrivningen.
+
 \section{Användarbeskrivning}
+\subsection{A}
 Vi riktar oss mot andra studenter och spelintresserade som vill ha ett kul tidsfördriv.
 
 Vi förväntar oss att användarna har spelat enkla flash-spel förut och klarar av att navigera i en simpel meny. Inte så mycket alltså.
 
+\subsection{B}
+Vi riktar oss mot andra studenter och spelintresserade som vill ha ett kul tidsfördriv.
+
+Vi förväntar oss att användarna har spelat enkla flash-spel förut och klarar av att navigera i en simpel meny. Inte så mycket alltså.
+
+Användaren bör också ha en viss tolerans mot buggar.
+
+\subsection{C}
+Inget som vi gjorde under projektet ändrade vilken användare vi riktade oss mot.
+
 \section{Användarscenarier}
+\subsection{A}
 Två användare sitter efter lunch och har inget att göra, så de bestämmer sig för att spela vårt spel. De sätter sig vid en dator och startar en spelomgång. Vid datorns tangentbord har de varsin uppsättning knappar för att navigera och skjuta. Efter att ha skjutit och rammat varandra ett tag så får en av användarna slut på hitpoints och hans skepp sjunker och han förlorar. Efter matchen frågar programmet om de vill köra en till omgång men användarna bestämmer sig för att göra något annat så de stänger ner programmet.
 \begin{figure}[h!]
 	\centering
@@ -111,7 +130,21 @@ Två användare sitter efter lunch och har inget att göra, så de bestämmer sig för
 	\caption{Huvudmeny och spelplan}
 \end{figure}
 
+\subsection{B}
+Två användare sitter efter lunch och har inget att göra, så vi tvingar dem att spela vårt spel. De sätter sig vid en dator och startar en spelomgång. Spelets meny navigeras med tangentbordet och det tar ett tag för användarna att sluta använda musen. Vid datorns tangentbord har de varsin uppsättning knappar för att navigera och skjuta. Efter att ha skjutit och rammat varandra ett tag så får en av användarna slut på hitpoints och hans skepp sjunker och han förlorar. Efter matchen frågar programmet om de vill köra en till omgång men vi stoppar dem för det är buggat just nu.
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=0.4\textwidth]{Bilder/nyMeny}
+	%\caption{Spelets huvudmeny}
+	\includegraphics[width=0.4\textwidth]{Bilder/nyGame}
+	\caption{Slutgiltig huvudmeny och spelplan}
+\end{figure}
+\subsection{C}
+Scenariot blev ungefär så som vi tänkte oss. Det kom upp lite småsaker som vi inte hade tänkt oss men användarupplevelsen var densamma.
+
 \section{Testplan}
+\subsection{A}
 Vi vill använda oss mest av användartester, för att se hur enkelt det är att förstå spelet och hur vi kan göra det roligare och väl balanserat. 
 
 Sen tänker vi också skriva lite unit-tester för bland annat kollisioner och annan logik som är enkel att testa.
@@ -130,6 +163,18 @@ Användaren ska kunna navigera huvudmenyn för och ändra spelets inställningar. An
 
 Användaren ska kunna starta en spelomgång och spela utan att vara förhindrad av okunskap gällande spelets regler och kontroller.
 
+\subsection{B}
+Vi använde användartester för att hitta buggar och se om spelupplevelsen blev som vi tänkte oss.
+
+\subsubsection{Scenario 1}
+
+Användaren kör spelet. Vi frågar användaren om spelmekaniken var tillfredsställande och om det uppstod några buggar.
+
+\subsection{C}
+Unit-tester uteblev då vi aldrig fann behovet av dem. Ursprungligen tänkte vi bara använda unit-tester för några få saker så när de inte genomsyrade hela processen så var de lätta att glömma. Om vi verkligen skulle använda unit-tester så hade vi nog behövt tillämpa dem överallt.
+
+Testet för navigation i menyn uteblev då den i slutändan inte hade tillräckligt med funktionalitet för att det skulle vara någon idé med ett test.
+
 \section{Programdesign}
 Vårat spel kommer ha en huvudklass (\ttt{Pirates}) som skapar alla olika objekt och har en spel-loop. Den kommer antagligen ha lite privata hjälpmetoder och möjligtvis någon metod för att kommunicera med andra klasser.
 
@@ -145,6 +190,11 @@ Efter att ha ritat bilderna nedan inser vi att vi antagligen kommer behöva någon
 	\includegraphics[width=0.3\textwidth]{Bilder/Program_Flow}
 	\caption{Klassdiagram och programflödesschema}
 \end{figure}
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=\textwidth]{Bilder/CLASSdiagramet}
+	\caption{Ett klassdiagram med klass}
+\end{figure}
 
 \section{Tekniska specifikationer}
 	\begin{itemize}
@@ -155,8 +205,15 @@ Efter att ha ritat bilderna nedan inser vi att vi antagligen kommer behöva någon
 
 \section{Tidsplan}
 
+\subsection{A}
 För tillfället har vi delat upp vår tid med projektet i tre perioder. Period 1 är dagarna mellan övningen fredagen 08/05 och övningen onsdagen 13/05, period 2 är från 13/05 till söndagen 17/05 och period 3 är från måndagen 18/05 till sista övningen 22/05.
 
-Under första perioden vill vi skapa en körbar alphaverison. Denna version vill vi sedan användartesta under period 2 för att få feedback. I period 3 vill vi sedan använda feedbacken för att göra en slutgiltig verison.
+Under första perioden vill vi skapa en körbar alphaverison. Denna version vill vi sedan användartesta under period 2 för att få feedback. I period 3 vill vi sedan använda feedbacken för att göra en slutgiltig version.
+
+\subsection{B}
+Vårt mål att ha en spelbar version till den 13/05 uppnåddes inte fullt. Användartester hamnade då efter och kunde inte utföras i den utsträckning som vi ursprungligen planerade. Perioder med användartester och kodning flöt samman och blev i slutändan inte så väldefinierade som vi hade planerat.
+
+\subsection{C}
+Programmet kunde köras men var inte så fullbordat som vi hade hoppats på, problemet var att kollision med öar tog längre tid än förväntat. Vi var nog även lite väl optimistiska i vår tidsplan, både som tidsoptimister, men även att Alexander som gjorde stora delar av tidsplanen inte uppskattade korrekt hur snabbt August skulle lära sig hur man arbetar med versionshantering. Detta samt att vi har varit lite dåliga på att dela upp arbetet ordentligt vilket gjort att vi inte riktigt varit säkra på vad vi ska göra. Kommunikation är $A$ och $\Omega$ med andra ord.
 
 \end{document}

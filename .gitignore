@@ -3,3 +3,4 @@ Rapport/*
 !Rapport/*.tex
 !Rapport/Bilder
 Kod/.idea/*
+*.db
