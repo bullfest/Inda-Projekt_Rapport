@@ -72,7 +72,7 @@
 		
 		\HRule \\[0.5cm]
 		
-		{\large A game for landlubbers to feel the breeze of seven seas} \\ [1.5cm]
+		{\large A game for landlubbers to feel the breeze of the seven seas} \\ [1.5cm]
 		
 		\large Alexander Viklund
 		\\[0.1cm] \large August Falk
@@ -131,7 +131,7 @@ Två användare sitter efter lunch och har inget att göra, så de bestämmer sig för
 \end{figure}
 
 \subsection{B}
-Två användare sitter efter lunch och har inget att göra, så vi tvingar dem att spela vårt spel. De sätter sig vid en dator och startar en spelomgång. Spelets meny navigeras med tangentbordet och det tar ett tag för användarna att sluta använda musen. Vid datorns tangentbord har de varsin uppsättning knappar för att navigera och skjuta. Efter att ha skjutit och rammat varandra ett tag så får en av användarna slut på hitpoints och hans skepp sjunker och han förlorar. Efter matchen frågar programmet om de vill köra en till omgång men vi stoppar dem för det är buggat just nu.
+Två användare sitter efter lunch och har inget att göra, så vi tvingar dem att spela vårt spel. De sätter sig vid en dator och startar en spelomgång. Spelets meny navigeras med tangentbordet och det tar ett tag för användarna att sluta använda musen. Vid datorns tangentbord har de varsin uppsättning knappar för att navigera och skjuta. Efter att ha skjutit och rammat varandra ett tag så får en av användarna slut på hitpoints och hans skepp sjunker och han förlorar. Efter matchen frågar programmet om de vill köra en till omgång men vi stoppar dem för det är buggat just nu. Ja, det här scenariot hände.
 
 \begin{figure}[h!]
 	\centering
@@ -168,14 +168,26 @@ Vi använde användartester för att hitta buggar och se om spelupplevelsen blev so
 
 \subsubsection{Scenario 1}
 
-Användaren kör spelet. Vi frågar användaren om spelmekaniken var tillfredsställande och om det uppstod några buggar.
+Användaren kör spelet och vi observerar och antecknar. Vi frågar användaren om spelmekaniken var tillfredsställande och om det uppstod några buggar. Vi ställer även öppna frågor för att få kvalitativa data.
+
+\subsubsection{Resultat}
+Användarna hade lite problem med att förstå kontrollerna för menyn, då de instinktivt gick efter musen istället för att styra med piltangenterna + enter i menyn. Vi märkte även att det blev lite problem med att ha en långsam updateringsfrekvens för menyn (0.5 s), detta gör man måste hålla ner enter för att välja saker, något som är kontraintuitivt.
+
+Själva spelomgången gick bra, spelarna förstod genast vad spelet gick ut på och de hade kul när de spelade spelet. Fysiken i spelet verkar även den mycket lyckad då det är lite svårt att ha full kontroll på sitt skepp, men ändå styrbart.
+
+Vid lite frågor visade det sig att spelarna inte hade sett att man hade liv samt att de inte förstod direkt att de gröna blobarna är öar.
+
+Generellt sett så var de nöjda med sin spelupplevelse.
+
+ 
 
 \subsection{C}
-Unit-tester uteblev då vi aldrig fann behovet av dem. Ursprungligen tänkte vi bara använda unit-tester för några få saker så när de inte genomsyrade hela processen så var de lätta att glömma. Om vi verkligen skulle använda unit-tester så hade vi nog behövt tillämpa dem överallt.
+Unit-tester uteblev då vi aldrig fann behovet av dem. Ursprungligen tänkte vi bara använda unit-tester för några få saker så när de inte genomsyrade hela processen så var de lätta att glömma. Om vi verkligen skulle använda unit-tester så hade vi nog behövt tillämpa dem från första början.
 
 Testet för navigation i menyn uteblev då den i slutändan inte hade tillräckligt med funktionalitet för att det skulle vara någon idé med ett test.
 
 \section{Programdesign}
+\subsection{A}
 Vårat spel kommer ha en huvudklass (\ttt{Pirates}) som skapar alla olika objekt och har en spel-loop. Den kommer antagligen ha lite privata hjälpmetoder och möjligtvis någon metod för att kommunicera med andra klasser.
 
 För att hantera grafik kommer vi skapa en \ttt{Window}-klass. Den kommer att hantera objekt som ärver den abstrakta klassen \ttt{Drawable} och rita dem när \ttt{Pirates} anropar \ttt{Window}s \ttt{draw()}-metod.
@@ -195,6 +207,23 @@ Efter att ha ritat bilderna nedan inser vi att vi antagligen kommer behöva någon
 	\includegraphics[width=\textwidth]{Bilder/CLASSdiagramet}
 	\caption{Ett klassdiagram med klass}
 \end{figure}
+\subsection{B}
+Spelets huvudklass är \ttt{Pirates}, klassen innehåller main-loopen. Klassen har lite publika metoder för menyhanteringen samt lägga till och ta bort några olika objekt ur spelet.
+
+\ttt{Window}-klassen beter sig lite annorlunda än planerat, den anropar draw på drawables och låter dem rita upp sig själva istället för att hämta värden från dem och sedan rita upp bilderna efter det. Denna approach visade sig vara väldigt bra för att rita grejer som inte är sprites rakt av.
+
+Kollision och uppdatering/hantering av borttagning visade sig passa mycket bättre som två olika interfaces/abstrakta klasser, då alla objekt man kan kollidera med inte nödvändigtvis behöver uppdateras (t.ex. öar). \ttt{Entity} ärver dock fortfarande från \ttt{Drawable}.
+
+För att hantera positioner, rotationer och kollisioner så skapade vi en klass \ttt{Point} som ärver från \ttt{Vector} som ärver från \ttt{Matrix}. Point representerar en 2D-vektor och innehåller bland annat funktioner för rotation, normalisering och multiplikation. Dessa klasser används väldigt intensivt vid kollisionshantering och för att hålla reda på positioner och fart.
+
+Ett komplett klassdiagram hittar du i slutet av rapporten.
+
+\subsection{C}
+Det blev många fler klasser och interfaces än ursprungligen planerat. Detta beror dels på att vi insåg bättre designmönster under projektets gång, men även på att vi missat att tänka på vissa grejer såsom menyn. 
+
+Vissa designval har allteftersom projektet fortskridit visat sig lite kunna göras på bättre sätt. T.ex. så insåg vi att main-metoden istället skulle kunna ligga på meny-klassen och så får Pirates istället vara en ren spel-klass. Vector har också visat sig vara ganska onödig. Vissa designval som kändes helt uppenbara när de gjordes visar sig i längen vara lite konstiga.
+
+Detta visar på att en iterativ designprocess för programstrukturen är rätt bra. För det är viktigt med ett väldesignat program för att ha ett program som enkelt kan utvidgas och underhållas.
 
 \section{Tekniska specifikationer}
 	\begin{itemize}
@@ -215,5 +244,20 @@ Vårt mål att ha en spelbar version till den 13/05 uppnåddes inte fullt. Användar
 
 \subsection{C}
 Programmet kunde köras men var inte så fullbordat som vi hade hoppats på, problemet var att kollision med öar tog längre tid än förväntat. Vi var nog även lite väl optimistiska i vår tidsplan, både som tidsoptimister, men även att Alexander som gjorde stora delar av tidsplanen inte uppskattade korrekt hur snabbt August skulle lära sig hur man arbetar med versionshantering. Detta samt att vi har varit lite dåliga på att dela upp arbetet ordentligt vilket gjort att vi inte riktigt varit säkra på vad vi ska göra. Kommunikation är $A$ och $\Omega$ med andra ord.
+
+\section{Sammanfattning}
+Vi har lärt oss väldigt mycket från projektet. Bland annat:
+\begin{itemize}
+	\item Vad som är viktigt vid arbete med kod i grupp.
+	\item Hur man arbetar med grafik.
+	\item Git
+	\item Att kollision kan vara en pain in the ass.
+	\item Mer erfarenhet av arbete med större mängder kod
+	\item Att läsa igenom och förstå andras kod, framförallt när den är halvslafsigt skriven
+	\item En algoritm för konvexa skal
+	\item Testning är viktigt, men lite tråkigt
+	\item Det är bra att skriva rapport under projektets gång, och inte klämma in det i slutet
+	\item Att IntelliJ är riktigt najs. Skolans linux är mindre najs.
+\end{itemize}
 
 \end{document}
